@@ -48,7 +48,7 @@ artifacts/
 **/Properties/launchSettings.json
 
 # VS Code
-.vscode/
+!.vscode/
 
 *_i.c
 *_p.c
@@ -287,3 +287,13 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+# Devenv
+.devenv*
+devenv.local.nix
+devenv.local.yaml
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml

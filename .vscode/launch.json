@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch ConsoleApp",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/ConsoleApp/bin/Debug/net10.0/ConsoleApp.dll",
+      "cwd": "${workspaceFolder}/ConsoleApp",
+      "console": "integratedTerminal",
+      "stopAtEntry": false
+    }
+  ]
+}
