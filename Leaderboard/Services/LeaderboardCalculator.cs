@@ -44,6 +44,32 @@ public class LeaderboardCalculator : ILeaderboardCalculator
 {
     public IReadOnlyList<UserWithPlace> CalculatePlaces(IReadOnlyList<IUserWithScore> usersWithScores, LeaderboardMinScores leaderboardMinScores)
     {
-       return Array.Empty<UserWithPlace>();
+        var orderedByScore = usersWithScores.OrderByDescending(u => u.Score);
+
+        var result = new List<UserWithPlace>();
+
+        var place = 1;
+        foreach (var user in orderedByScore)
+        {
+            if (place == 1 && user.Score < leaderboardMinScores.FirstPlaceMinScore)
+            {
+                place++;
+            }
+            
+            if (place == 2 && user.Score < leaderboardMinScores.SecondPlaceMinScore)
+            {
+                place++;
+            }
+            
+            if (place == 3 && user.Score < leaderboardMinScores.ThirdPlaceMinScore)
+            {
+                place++;
+            }
+
+            result.Add(new UserWithPlace(user.UserId, place));
+            place++;
+        }
+
+        return result;
     }
 }
