@@ -30,6 +30,12 @@ Extensions used: devenv (`datakurre.devenv`), direnv (`mkhl.direnv`), C# (`ms-do
 
 C# Dev Kit discovers tests via a design-time build inside VS Code's extension host, which only sees the environment VS Code was launched with — devenv extensions cover terminals and tasks, but not the host process itself. So launch VS Code from an activated shell: `cd` into the repo (direnv activates), then `code .`.
 
+## Rider
+
+Rider does not resolve `$DOTNET_ROOT`, so the devenv shell writes a stable, project-relative symlink instead: `.nix-tools/dotnet` → the SDK root from `devenv.nix`. It is recreated on every shell entry (always tracking the pinned SDK version) and the directory is git-ignored.
+
+Point Rider at it via *Settings → Build, Execution, Deployment → Toolset and Build → .NET CLI executable path* = `<project>/.nix-tools/dotnet/dotnet` (stored per-machine in `interview.sln.DotSettings.user`, along with *Auto-download .NET SDK* = off). Rider then picks MSBuild from that SDK automatically.
+
 ## Gotchas
 
 - devenv caches its evaluated environment in `.devenv/`, which is shared across git branch switches. If tools don't match `devenv.nix` (e.g. after checking out an older branch), force a clean re-evaluation: `rm -rf .devenv && devenv shell`.

@@ -19,5 +19,15 @@
     dotnet test
   '';
 
+  # Stable, project-relative symlink to the SDK root pinned in
+  # languages.dotnet above, recreated on every shell entry. Rider cannot
+  # resolve $DOTNET_ROOT, so its "dotnet CLI executable path" setting points
+  # at <repo>/.nix-tools/dotnet/dotnet instead of a /nix/store path that goes
+  # stale on every SDK update.
+  enterShell = ''
+    mkdir -p "${config.devenv.root}/.nix-tools"
+    ln -sfn "${config.languages.dotnet.package}/share/dotnet" "${config.devenv.root}/.nix-tools/dotnet"
+  '';
+
   # See full reference at https://devenv.sh/reference/options/
 }

@@ -297,3 +297,6 @@ devenv.local.yaml
 
 # pre-commit
 .pre-commit-config.yaml
+
+# devenv-provided tool symlinks (see enterShell in devenv.nix)
+/.nix-tools/
